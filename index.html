@@ -5,9 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>計算ばっちりプリントアプリ</title>
- <meta property="og:title" content="計算ばっちりプリントアプリ">
-    <meta property="og:description" content="【算数】前学年の復習ができる計算習熟アプリです。">
-    <meta property="og:type" content="website">
   <!-- ＋－×÷を使ったかわいいファビコン（タブアイコン） -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='16' fill='%23ffffff' stroke='%23cbd5e1' stroke-width='3'/%3E%3Crect x='7' y='7' width='23' height='23' rx='7' fill='%23ff6b6b'/%3E%3Cpath d='M18.5 12.5v12M12.5 18.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='34' y='7' width='23' height='23' rx='7' fill='%234ecdc4'/%3E%3Cpath d='M39.5 18.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='7' y='34' width='23' height='23' rx='7' fill='%23ffd166'/%3E%3Cpath d='M14 41l9 9M23 41l-9 9' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='34' y='34' width='23' height='23' rx='7' fill='%235c7cfa'/%3E%3Cpath d='M39.5 45.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Ccircle cx='45.5' cy='40.2' r='2.1' fill='%23fff'/%3E%3Ccircle cx='45.5' cy='50.8' r='2.1' fill='%23fff'/%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -169,7 +166,7 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- ヘッダー -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+  <header id="app-header" class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
       <!-- タイトル＆＋－×÷かわいいアイコン -->
       <div class="flex items-center gap-2.5">
@@ -190,7 +187,7 @@
         </div>
         <div>
           <h1 class="text-lg sm:text-xl font-extrabold text-slate-800 tracking-tight leading-tight">
-            計算ばっちりプリントアプリ
+            計算ばっちりプリントアプリ<span id="student-distribution-tag" class="hidden text-amber-800">【児童配信用】</span>
           </h1>
           <div class="flex flex-wrap items-center gap-1.5">
             <p class="text-[11px] sm:text-xs text-slate-500 font-bold">小学校1年〜6年 既習事項ミックスドリル</p>
@@ -200,7 +197,7 @@
       </div>
 
       <!-- モード切替タブ -->
-      <nav class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+      <nav id="header-nav" class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
         <button id="tab-study" onclick="switchMode('study')" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition bg-white text-blue-600 shadow-sm">
           ✏️ プリントをとく
         </button>
@@ -1941,6 +1938,21 @@
         const viewTeacher = document.getElementById('view-teacher');
         if (tabTeacher) tabTeacher.classList.add('hidden');
         if (viewTeacher) viewTeacher.classList.add('hidden');
+
+        const distTag = document.getElementById('student-distribution-tag');
+        if (distTag) distTag.classList.remove('hidden');
+        document.title = '計算ばっちりプリントアプリ【児童配信用】';
+
+        const appHeader = document.getElementById('app-header');
+        if (appHeader) {
+          appHeader.classList.remove('bg-white', 'border-slate-200');
+          appHeader.classList.add('bg-yellow-50', 'border-yellow-200');
+        }
+        const headerNav = document.getElementById('header-nav');
+        if (headerNav) {
+          headerNav.classList.remove('bg-slate-100', 'border-slate-200');
+          headerNav.classList.add('bg-yellow-100/80', 'border-yellow-200');
+        }
       }
 
       if (urlClassCode) {
