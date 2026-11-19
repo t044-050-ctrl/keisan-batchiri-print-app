@@ -5,9 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>計算ばっちりプリントアプリ</title>
- <meta property="og:title" content="計算ばっちりプリントアプリ">
-    <meta property="og:description" content="【算数】前学年の復習ができる計算習熟アプリです。">
-    <meta property="og:type" content="website">
   <!-- ＋－×÷を使ったかわいいファビコン（タブアイコン） -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='16' fill='%23ffffff' stroke='%23cbd5e1' stroke-width='3'/%3E%3Crect x='7' y='7' width='23' height='23' rx='7' fill='%23ff6b6b'/%3E%3Cpath d='M18.5 12.5v12M12.5 18.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='34' y='7' width='23' height='23' rx='7' fill='%234ecdc4'/%3E%3Cpath d='M39.5 18.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='7' y='34' width='23' height='23' rx='7' fill='%23ffd166'/%3E%3Cpath d='M14 41l9 9M23 41l-9 9' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Crect x='34' y='34' width='23' height='23' rx='7' fill='%235c7cfa'/%3E%3Cpath d='M39.5 45.5h12' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Ccircle cx='45.5' cy='40.2' r='2.1' fill='%23fff'/%3E%3Ccircle cx='45.5' cy='50.8' r='2.1' fill='%23fff'/%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -350,7 +347,7 @@
         <!-- 左カラム：問題リスト＆採点結果（7カラム） -->
         <div class="lg:col-span-7 space-y-4">
           <!-- 採点結果サマリー＆つまずき診断（採点後に表示） -->
-          <div id="grading-summary-box" class="hidden bg-white rounded-2xl p-4 sm:p-5 shadow-md border-2 border-blue-300 space-y-4"></div>
+          <div id="grading-summary-box" class="hidden scroll-mt-24 sm:scroll-mt-28 bg-white rounded-2xl p-4 sm:p-5 shadow-md border-2 border-blue-300 space-y-4"></div>
 
           <!-- 問題カード一覧 -->
           <div id="problems-container" class="space-y-3.5"></div>
@@ -445,7 +442,7 @@
           </div>
         </div>
 
-        <!-- 間違い傾向分析＆あなた専用の復習ドリル（10問ずつ・重複なし） -->
+        <!-- 間違い傾向分析＆あなた専用の復習ドリル（10問・回数ごとに別問題・別領域を自動編成） -->
         <div id="review-drills-section" class="mb-6"></div>
 
         <!-- 履歴テーブル -->
@@ -473,11 +470,11 @@
           </div>
         </div>
 
-        <!-- 統合URL発行ビルダー（１：学級限定集計 ＋ ２：プリント指定配布を1つのアドレスに統合） -->
+        <!-- 統合URL発行ビルダー（１：学級限定集計 ＋ ２：プリント指定配付を1つのアドレスに統合） -->
         <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-indigo-50/70 to-slate-50 border-2 border-blue-200 p-4 sm:p-5 space-y-3.5">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h3 class="text-sm sm:text-base font-extrabold text-blue-950">🔗 学級専用アドレス・プリント配布リンク作成</h3>
+              <h3 class="text-sm sm:text-base font-extrabold text-blue-950">🔗 学級専用アドレス・プリント配付リンク作成</h3>
               <p class="text-xs font-bold text-blue-800/90 mt-0.5">
                 「学級専用コード」と「開いた状態で配るプリント」を1つのアドレスにまとめて作成できます。
               </p>
@@ -545,7 +542,7 @@
             </div>
           </div>
 
-          <!-- 生成された配布用URL＆担任用管理URL -->
+          <!-- 生成された配付用URL＆担任用管理URL -->
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 pt-1">
             <!-- 児童に送るアドレス -->
             <div class="lg:col-span-7 bg-white rounded-xl p-3 border border-blue-200 space-y-1.5">
@@ -557,7 +554,7 @@
               </div>
               <div class="flex items-center gap-1.5">
                 <input id="generated-student-url" type="text" readonly class="flex-1 min-w-0 rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1.5 text-xs font-num text-slate-700 focus:outline-none" />
-                <button type="button" onclick="copyGeneratedUrl('generated-student-url', '児童配布用アドレスを コピーしました！')" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-extrabold shadow-sm shrink-0 transition">
+                <button type="button" onclick="copyGeneratedUrl('generated-student-url', '児童配付用アドレスを コピーしました！')" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-extrabold shadow-sm shrink-0 transition">
                   📋 コピー
                 </button>
               </div>
@@ -1301,8 +1298,8 @@
         { expr: "2.55 ÷ 7.5", ans: "0.34", unit: "わり切れるまで計算するわり算の筆算", note: "（わり切れるまで計算しましょう。）", hissan: true },
         { expr: "4.65 ÷ 1.5", ans: "3.1", unit: "2けたでわる小数のわり算の筆算", hissan: true },
         { expr: "18 ÷ 3.2", ans: "5 あまり 2", unit: "余りのある小数のわり算の筆算", note: "（商を一の位まで求め、あまりをかきましょう。）", hissan: true },
-        { expr: "36897 + 23158", ans: "60000", unit: "概数の計算", note: "（一万の位までがい数にして求めましょう。）" },
-        { expr: "36897 - 23158", ans: "14000", unit: "概数の計算", note: "（千の位までがい数にして求めましょう。）" },
+        { expr: "36897 + 23158", ans: "60000", unit: "概数の計算", note: "（一万の位までのがい数にして求めましょう。）" },
+        { expr: "36897 - 23158", ans: "14000", unit: "概数の計算", note: "（千の位までのがい数にして求めましょう。）" },
         { expr: "1839 × 217", ans: "400000", unit: "概数の計算", note: "（がい数にして求めましょう。）" },
         { expr: "42195 ÷ 698", ans: "60", unit: "概数の計算", note: "（がい数にして求めましょう。）" }
       ],
@@ -1315,8 +1312,8 @@
         { expr: "8 ÷ 2.5", ans: "3.2", unit: "わり切れるまで計算するわり算の筆算", note: "（わり切れるまで計算しましょう。）", hissan: true },
         { expr: "73.5 ÷ 4.9", ans: "15", unit: "2けたでわる小数のわり算の筆算", hissan: true },
         { expr: "25 ÷ 9.6", ans: "2 あまり 5.8", unit: "余りのある小数のわり算の筆算", note: "（商を一の位まで求め、あまりをかきましょう。）", hissan: true },
-        { expr: "64943 + 29739", ans: "90000", unit: "概数の計算", note: "（一万の位までがい数にして求めましょう。）" },
-        { expr: "64943 - 29739", ans: "35000", unit: "概数の計算", note: "（千の位までがい数にして求めましょう。）" },
+        { expr: "64943 + 29739", ans: "90000", unit: "概数の計算", note: "（一万の位までのがい数にして求めましょう。）" },
+        { expr: "64943 - 29739", ans: "35000", unit: "概数の計算", note: "（千の位までのがい数にして求めましょう。）" },
         { expr: "4673 × 328", ans: "1500000", unit: "概数の計算", note: "（がい数にして求めましょう。）" },
         { expr: "40327 ÷ 816", ans: "50", unit: "概数の計算", note: "（がい数にして求めましょう。）" }
       ],
@@ -1329,8 +1326,8 @@
         { expr: "2.73 ÷ 4.2", ans: "0.65", unit: "わり切れるまで計算するわり算の筆算", note: "（わり切れるまで計算しましょう。）", hissan: true },
         { expr: "5.78 ÷ 6.8", ans: "0.85", unit: "2けたでわる小数のわり算の筆算", hissan: true },
         { expr: "72 ÷ 4.6", ans: "15 あまり 3", unit: "余りのある小数のわり算の筆算", note: "（商を一の位まで求め、あまりをかきましょう。）", hissan: true },
-        { expr: "924370 + 198364", ans: "1120000", unit: "概数の計算", note: "（一万の位までがい数にして求めましょう。）" },
-        { expr: "924370 - 199764", ans: "724000", unit: "概数の計算", note: "（千の位までがい数にして求めましょう。）" },
+        { expr: "924370 + 198364", ans: "1120000", unit: "概数の計算", note: "（一万の位までのがい数にして求めましょう。）" },
+        { expr: "924370 - 199764", ans: "724000", unit: "概数の計算", note: "（千の位までのがい数にして求めましょう。）" },
         { expr: "432 × 285", ans: "120000", unit: "概数の計算", note: "（がい数にして求めましょう。）" },
         { expr: "62970 ÷ 890", ans: "70", unit: "概数の計算", note: "（がい数にして求めましょう。）" }
       ],
@@ -1523,7 +1520,7 @@
     let nextReviewDrillPlan = null;        // 「じぶんのきろく」に1つだけ表示する次回復習ドリルプラン
     let activeClassCode = "";              // 学級専用コード（URLパラメータ ?class= または担任設定）
     let cloudRecords = [];                 // Firebase有効時のクラウド同期履歴
-    let isStudentOnlyView = false;         // 児童配布用アドレスから開かれた場合は担任ダッシュボードを非表示
+    let isStudentOnlyView = false;         // 児童配付用アドレスから開かれた場合は担任ダッシュボードを非表示
 
     function createEmptyAnswerState() {
       return {
@@ -1571,6 +1568,24 @@
         return `${l}:${r}`;
       }
       return (st.val || '').trim();
+    }
+
+    // 未解答（または入力途中）かどうかを判定
+    function isAnswerIncomplete(st) {
+      if (!st) return true;
+      if (st.mode === 'amari') {
+        return !(st.q || '').trim() || !(st.r || '').trim();
+      }
+      if (st.mode === 'fraction') {
+        return !(st.num || '').trim() || !(st.den || '').trim();
+      }
+      if (st.mode === 'mixed') {
+        return !(st.whole || '').trim() || !(st.num || '').trim() || !(st.den || '').trim();
+      }
+      if (st.mode === 'ratio') {
+        return !(st.left || '').trim() || !(st.right || '').trim();
+      }
+      return !(st.val || '').trim();
     }
 
     try {
@@ -1707,7 +1722,7 @@
         og.style.color = '';
       });
 
-      // 現在選択中のプリントが上の学年のものになっていたら解除する（先生配布URL直開き時は除く）
+      // 現在選択中のプリントが上の学年のものになっていたら解除する（先生配付URL直開き時は除く）
       const selectedPid = Number(printSel.value || currentPrintId || 0);
       if (!allowKeepCurrent && selectedPid > maxAllowedId) {
         printSel.value = '';
@@ -1826,7 +1841,7 @@
       renderTeacherView();
     }
 
-    // 児童配布用URL＆担任用管理URLを組み立てて表示
+    // 児童配付用URL＆担任用管理URLを組み立てて表示
     function updateTeacherShareUrls() {
       const studentUrlInput = document.getElementById('generated-student-url');
       const teacherUrlInput = document.getElementById('generated-teacher-url');
@@ -1908,12 +1923,12 @@
         const printSel = document.getElementById('print-select');
         if (printSel) printSel.value = presetPrint;
         selectPrint(presetPrint);
-        showToast(`配布設定（学級: ${activeClassCode} / プリント№${presetPrint}）で開きました！`);
+        showToast(`配付設定（学級: ${activeClassCode} / プリント№${presetPrint}）で開きました！`);
       } else {
         const printSel = document.getElementById('print-select');
         if (printSel) printSel.value = '';
         selectPrint('');
-        showToast(`配布設定（学級: ${activeClassCode}）の児童画面を開きました！`);
+        showToast(`配付設定（学級: ${activeClassCode}）の児童画面を開きました！`);
       }
     }
 
@@ -2867,6 +2882,7 @@
       return x || 1;
     }
 
+    // 分数・帯分数の正規化（7/7などの整数化忘れや約分忘れは自動変換せず誤答にする）
     function normalizeFractionStr(str) {
       const s = String(str || '').replace(/\s+/g, '');
       const mMixed = s.match(/^(\d+)と(\d+)\/(\d+)$/);
@@ -2874,18 +2890,18 @@
         const w = Number(mMixed[1]);
         const n = Number(mMixed[2]);
         const d = Number(mMixed[3]);
-        if (d === 0) return s;
+        if (d <= 1 || n <= 0 || n >= d) return s;
+        if (gcd(n, d) !== 1) return s;
         const totN = w * d + n;
-        const g = gcd(totN, d);
-        return (d / g === 1) ? String(totN / g) : `${totN / g}/${d / g}`;
+        return `${totN}/${d}`;
       }
       const mFrac = s.match(/^(\d+)\/(\d+)$/);
       if (mFrac) {
         const n = Number(mFrac[1]);
         const d = Number(mFrac[2]);
-        if (d === 0) return s;
-        const g = gcd(n, d);
-        return (d / g === 1) ? String(n / g) : `${n / g}/${d / g}`;
+        if (d <= 1 || n <= 0) return s;
+        if (gcd(n, d) !== 1) return s;
+        return `${n}/${d}`;
       }
       return s;
     }
@@ -2919,7 +2935,7 @@
         return !Number.isNaN(u1) && !Number.isNaN(u2) && u1 === c1 && u2 === c2;
       }
 
-      // 分数・帯分数・整数一致（例: 6/6 == 1, 1と1/2 == 3/2）
+      // 分数・帯分数・整数一致（例: 1と1/2 == 3/2、ただし 7/7 や未約分は不可）
       if (cRaw.includes('/') || uRaw.includes('/')) {
         const uNorm = normalizeFractionStr(uRaw);
         const cNorm = normalizeFractionStr(cRaw);
@@ -3631,283 +3647,562 @@
     function gradeCurrentProblems() {
       if (!activeProblems || activeProblems.length === 0) return;
 
+      // 解き忘れ（未入力または入力途中）がある場合は採点せず、最初の未解答問題へ移動
+      const firstUnansweredIdx = activeProblems.findIndex((_, idx) => isAnswerIncomplete(userAnswers[idx]));
+      if (firstUnansweredIdx !== -1) {
+        activeQuestionIdx = firstUnansweredIdx;
+        activeTargetType = 'main';
+        renderProblems();
+        const targetCard = document.getElementById(`problem-card-${firstUnansweredIdx}`);
+        if (targetCard) {
+          const headerEl = document.getElementById('app-header');
+          const headerOffset = headerEl ? headerEl.offsetHeight + 12 : 96;
+          const targetY = targetCard.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+        }
+        showToast(`ときわすれが あるよ！第${firstUnansweredIdx + 1}もんを とこう！`);
+        return;
+      }
+
       let correctCount = 0;
       const weakUnitSet = new Set();
 
       gradingResults = activeProblems.map((prob, idx) => {
         const uStr = formatAnswerStateToString(userAnswers[idx]);
-        const isCorrect = checkAnswerMatch(uStr, prob.ans);
-        if (isCorrect) {
+        const isOk = checkAnswerMatch(uStr, prob.ans);
+        if (isOk) {
           correctCount++;
         } else {
           weakUnitSet.add(prob.unit);
         }
-
-        const hissanHtml = prob.hissan
-          ? buildHissanGridHtml(prob.expr, prob.ans, prob.unit, prob.note, prob)
-          : '';
-
         return {
-          correct: isCorrect,
-          userAnswer: uStr,
-          hint: isCorrect ? '' : generateHint(prob),
-          hissanHtml
+          correct: isOk,
+          userStr: uStr,
+          hint: isOk ? '' : generateHint(prob),
+          hissanHtml: (!isOk && prob.hissan) ? buildHissanGridHtml(prob.expr, prob.ans, prob.unit, prob.note, prob) : ''
         };
       });
 
-      const total = activeProblems.length;
-      const score = Math.round((correctCount / total) * 100);
+      const totalCount = activeProblems.length;
+      const score = Math.round((correctCount / totalCount) * 100);
       const weakUnits = Array.from(weakUnitSet);
 
-      saveRecordToHistory(score, correctCount, total, weakUnits);
+      // 間違えた問題ごとの「れんしゅう問題（類題）」を準備
+      practiceStates = {};
+      gradingResults.forEach((res, idx) => {
+        if (!res.correct) {
+          const pProb = generateSimilarProblem(activeProblems[idx], new Set([activeProblems[idx].expr]));
+          practiceStates[idx] = {
+            prob: pProb,
+            ansObj: createEmptyAnswerState(),
+            checked: false,
+            correct: false,
+            hint: generateHint(pProb)
+          };
+        }
+      });
 
+      // 履歴保存（ローカル＆クラウド）
+      const gradeVal = document.getElementById('student-grade').value || '未選択';
+      const classVal = document.getElementById('student-class').value || '未選択';
+      const numVal = document.getElementById('student-number').value || '未選択';
+      const nameVal = document.getElementById('student-name').value.trim() || 'なまえなし';
+
+      const newRecord = {
+        id: 'rec_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        timestamp: new Date().toLocaleString('ja-JP'),
+        createdAtMs: Date.now(),
+        classCode: activeClassCode || '',
+        grade: gradeVal,
+        cls: classVal,
+        num: numVal,
+        name: nameVal,
+        printId: currentPrintId,
+        printTitle: currentPrintTitle,
+        isMiniDrill: isMiniDrillMode,
+        isReviewDrill: isReviewDrillMode,
+        score,
+        correctCount,
+        totalCount,
+        weakUnits,
+        wrongItems: activeProblems
+          .map((p, i) => gradingResults[i].correct ? null : {
+            expr: p.expr,
+            ans: p.ans,
+            unit: p.unit,
+            note: p.note || '',
+            hissan: Boolean(p.hissan),
+            sourcePrintId: p.sourcePrintId || currentPrintId
+          })
+          .filter(Boolean)
+      };
+
+      historyRecords.unshift(newRecord);
+      try {
+        localStorage.setItem('keisan_batchiri_records_v1', JSON.stringify(historyRecords.slice(0, 200)));
+      } catch (e) {
+        console.warn('localStorage save skipped', e);
+      }
+      saveRecordToCloud(newRecord);
+
+      // サマリー表示更新
       const summaryBox = document.getElementById('grading-summary-box');
       if (summaryBox) {
-        const cheerMsg = score === 100
-          ? '🎉 すごい！100てん まんてん！パーフェクト！'
-          : (score >= 80
-            ? '🌟 おしい！あと もうすこしで 100てんだよ！'
-            : '💪 まちがえた もんだいの「れんしゅうもんだい」に ちょうせんしよう！');
+        let medalBadge = '';
+        if (score === 100) {
+          medalBadge = `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 text-xs sm:text-sm font-extrabold">🏅 100てん メダルかくとく！</span>`;
+        } else if (score >= 80) {
+          medalBadge = `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-300 text-xs sm:text-sm font-extrabold">🌟 おしい！あとすこし！</span>`;
+        } else {
+          medalBadge = `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300 text-xs sm:text-sm font-extrabold">💪 ヒントと れんしゅう問題で ばっちりにしよう！</span>`;
+        }
 
         const weakListHtml = weakUnits.length > 0
-          ? `<div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 space-y-2">
-              <div class="text-xs font-extrabold text-amber-900">🔍 ふくしゅうすると もっと のびる けいさん：</div>
+          ? `<div class="pt-3 border-t border-slate-200 space-y-2.5">
+              <div class="text-xs sm:text-sm font-extrabold text-slate-700">📌 まちがえた 単元（つまずき診断）：</div>
               <div class="flex flex-wrap gap-1.5">
-                ${weakUnits.map(u => `<span class="px-2.5 py-0.5 rounded-full bg-white border border-amber-300 text-xs font-extrabold text-amber-900">${u}</span>`).join('')}
+                ${weakUnits.map(u => `<span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 text-xs font-extrabold">${u}</span>`).join('')}
               </div>
-              <button type="button" onclick='startMiniDrill(${JSON.stringify(weakUnits)})' class="w-full sm:w-auto px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-extrabold shadow-sm transition">
-                🔥 にがてこくふく 5もんミニドリルを やる
-              </button>
+              <div class="pt-1">
+                <button type="button" onclick="startFiveQuestionMiniDrill()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold text-xs sm:text-sm shadow-sm transition flex items-center justify-center gap-2">
+                  <span>🔥 にがてこくふく！5もん しゅうちゅうミニドリルに ちょうせん</span>
+                </button>
+              </div>
             </div>`
-          : '';
+          : `<div class="pt-2 text-xs sm:text-sm font-extrabold text-emerald-700">🎉 ぜんもん せいかい！この プリントは ばっちりだね！</div>`;
 
         summaryBox.innerHTML = `
           <div class="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <div class="text-xs font-extrabold text-blue-600 mb-0.5">${currentPrintTitle}</div>
-              <div class="text-lg sm:text-xl font-extrabold text-slate-800">${cheerMsg}</div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="px-4 py-2 rounded-2xl bg-rose-50 border-2 border-rose-300 text-center">
-                <div class="text-[11px] font-extrabold text-rose-700">てんすう</div>
-                <div class="text-2xl sm:text-3xl font-black text-rose-600 font-num">${score}<span class="text-base ml-0.5">てん</span></div>
+            <div class="flex items-baseline gap-3">
+              <div class="text-3xl sm:text-4xl font-black font-num ${score === 100 ? 'text-amber-500' : 'text-blue-600'}">
+                ${score}<span class="text-lg sm:text-xl ml-0.5">てん</span>
               </div>
-              <div class="px-3.5 py-2 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                <div class="text-[11px] font-bold text-slate-500">せいかい</div>
-                <div class="text-lg sm:text-xl font-extrabold text-slate-800 font-num">${correctCount} / ${total}</div>
+              <div class="text-sm sm:text-base font-extrabold text-slate-600 font-num">
+                （${correctCount} / ${totalCount} もん せいかい）
               </div>
             </div>
+            <div class="flex flex-wrap items-center gap-2">
+              ${medalBadge}
+              <button type="button" onclick="captureResultScreenshot()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-extrabold shadow-sm transition flex items-center gap-1.5">
+                <span>📸 けっかを スクリーンショットで ほぞん</span>
+              </button>
+            </div>
           </div>
-
-          <div class="flex flex-wrap items-center gap-2 pt-1">
-            <button type="button" onclick="takeResultScreenshot()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold shadow-sm transition flex items-center gap-1.5">
-              <span>📸 スクリーンショットを とる</span>
-            </button>
-            <button type="button" onclick="switchMode('record')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs sm:text-sm font-extrabold transition">
-              🏅 じぶんのきろくを みる
-            </button>
-          </div>
-
           ${weakListHtml}
         `;
         summaryBox.classList.remove('hidden');
-        summaryBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
       const firstWrongIdx = gradingResults.findIndex(r => !r.correct);
       if (firstWrongIdx !== -1) {
-        ensurePracticeProblem(firstWrongIdx);
         activeQuestionIdx = firstWrongIdx;
         activeTargetType = 'practice';
       }
 
       renderProblems();
+
+      // 学年・組・出席番号と点数がヘッドバーに隠れず一緒に見える位置（最上部）へスクロール
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (score === 100) {
+        showToast('🎉 100てん おめでとう！すごいね！');
+      } else {
+        showToast(`採点おわり！ ${score}てん だったよ！`);
+      }
     }
 
     // =========================================================================
-    // 8. 間違えた問題の類似練習問題（1問ずつ自動生成）＆にがて克服ミニドリル
+    // 8. 類題自動生成＆間違えた問題のその場練習・5もんミニドリル
     // =========================================================================
-    function generateSimilarProblem(origProb) {
+    function generateSimilarProblem(origProb, excludeExprs = new Set()) {
       const expr = String(origProb.expr || '').trim();
       const unit = String(origProb.unit || '');
+      const note = String(origProb.note || '');
+      const hissan = Boolean(origProb.hissan);
+      const sourcePrintId = origProb.sourcePrintId || currentPrintId || 1;
 
-      const mInt = expr.match(/^(\d+)\s*([+\-×÷])\s*(\d+)$/);
-      if (mInt && !expr.includes('.') && !expr.includes('/')) {
-        const a = Number(mInt[1]);
-        const op = mInt[2];
-        const b = Number(mInt[3]);
+      const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+      const isAllowedExpr = (candidateExpr) => candidateExpr !== expr && !excludeExprs.has(candidateExpr);
 
-        if (op === '+') {
-          if (a === 0 || b === 0) {
-            const n = Math.floor(Math.random() * 8) + 2;
-            const newExpr = (a === 0) ? `0 + ${n}` : `${n} + 0`;
-            return { expr: newExpr, ans: String(n), unit, hissan: origProb.hissan };
+      // 0の計算（同じ数をひく a - a、0をひく a - 0、0をたす a + 0 / 0 + b、0をわる 0 ÷ b）をパターン別に厳密生成
+      const mZeroOp = expr.match(/^(\d+)\s*([+\-÷])\s*(\d+)$/);
+      if (mZeroOp) {
+        const za = Number(mZeroOp[1]);
+        const zop = mZeroOp[2];
+        const zb = Number(mZeroOp[3]);
+        if (zop === '-' && za === zb && za > 0) {
+          for (let t = 0; t < 30; t++) {
+            const x = randInt(1, 9);
+            const cExpr = `${x} - ${x}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: '0', unit, hissan, sourcePrintId };
+            }
           }
-          if (a < 10 && b < 10 && a + b > 10) {
-            let na = Math.floor(Math.random() * 5) + 5;
-            let nb = Math.floor(Math.random() * 5) + 5;
-            if (na === a && nb === b) na = (na === 9 ? 8 : na + 1);
-            return { expr: `${na} + ${nb}`, ans: String(na + nb), unit, hissan: origProb.hissan };
-          }
-          const delta = (a >= 10) ? (Math.floor(Math.random() * 5) + 1) : 1;
-          const na = a + delta;
-          const nb = Math.max(1, b - (b > 2 ? 1 : 0));
-          return { expr: `${na} + ${nb}`, ans: String(na + nb), unit, hissan: origProb.hissan };
         }
-
-        if (op === '-') {
-          if (b === 0 || a === b) {
-            const n = Math.floor(Math.random() * 8) + 2;
-            const newExpr = (b === 0) ? `${n} - 0` : `${n} - ${n}`;
-            return { expr: newExpr, ans: String(b === 0 ? n : 0), unit, hissan: origProb.hissan };
+        if (zop === '-' && zb === 0 && za > 0) {
+          for (let t = 0; t < 30; t++) {
+            const x = randInt(1, 9);
+            const cExpr = `${x} - 0`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(x), unit, hissan, sourcePrintId };
+            }
           }
-          if (a >= 11 && a <= 18 && b <= 9 && (a - 10) < b) {
-            let na = Math.floor(Math.random() * 6) + 11;
-            let nb = Math.floor(Math.random() * 4) + 6;
-            if ((na - 10) >= nb) nb = (na - 10) + 2;
-            if (na === a && nb === b) na = (na === 17 ? 16 : na + 1);
-            return { expr: `${na} - ${nb}`, ans: String(na - nb), unit, hissan: origProb.hissan };
-          }
-          const na = a + 2;
-          const nb = Math.min(na - 1, b + 1);
-          return { expr: `${na} - ${nb}`, ans: String(na - nb), unit, hissan: origProb.hissan };
         }
-
-        if (op === '×') {
-          if (a <= 9 && b <= 9) {
-            const na = (a === 9) ? 8 : a + 1;
-            return { expr: `${na} × ${b}`, ans: String(na * b), unit, hissan: origProb.hissan };
+        if (zop === '+' && zb === 0) {
+          for (let t = 0; t < 30; t++) {
+            const x = randInt(1, 9);
+            const cExpr = `${x} + 0`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(x), unit, hissan, sourcePrintId };
+            }
           }
-          const na = a + 3;
-          return { expr: `${na} × ${b}`, ans: String(na * b), unit, hissan: origProb.hissan };
         }
-
-        if (op === '÷' && b > 0) {
-          if (String(origProb.ans || '').includes('あまり')) {
-            const q = Math.max(2, Math.floor(a / b));
-            const r = Math.max(1, (a % b === b - 1) ? 1 : (a % b) + 1);
-            const na = b * q + r;
-            return { expr: `${na} ÷ ${b}`, ans: `${q} あまり ${r}`, unit, hissan: origProb.hissan };
+        if (zop === '+' && za === 0) {
+          for (let t = 0; t < 30; t++) {
+            const x = randInt(1, 9);
+            const cExpr = `0 + ${x}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(x), unit, hissan, sourcePrintId };
+            }
           }
-          if (a % b === 0 && a >= b) {
-            const q = Math.max(2, Math.round(a / b) + 1);
-            const na = b * q;
-            return { expr: `${na} ÷ ${b}`, ans: String(q), unit, hissan: origProb.hissan };
+        }
+        if (zop === '÷' && za === 0) {
+          for (let t = 0; t < 30; t++) {
+            const x = randInt(2, 9);
+            const cExpr = `0 ÷ ${x}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: '0', unit, hissan, sourcePrintId };
+            }
           }
         }
       }
 
-      const candidates = [];
-      Object.values(PROBLEMS_BY_PRINT).forEach(arr => {
-        arr.forEach(p => {
-          if (p.unit === unit && p.expr !== expr) {
-            candidates.push(p);
+      // 1けたのたし算（くり上がりあり / 10になる / くり上がりなし）
+      const m1Add = expr.match(/^(\d)\s*\+\s*(\d)$/);
+      if (m1Add && Number(m1Add[1]) > 0 && Number(m1Add[2]) > 0) {
+        const origSum = Number(m1Add[1]) + Number(m1Add[2]);
+        for (let t = 0; t < 40; t++) {
+          const a = randInt(1, 9);
+          const b = randInt(1, 9);
+          const matchPattern = origSum > 10
+            ? (a + b > 10)
+            : (origSum === 10 ? (a + b === 10) : (a + b < 10));
+          const cExpr = `${a} + ${b}`;
+          if (matchPattern && isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(a + b), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 1けたのひき算（くり下がりなし、a !== b かつ b > 0）
+      const m1Sub = expr.match(/^(\d)\s*-\s*(\d)$/);
+      if (m1Sub && Number(m1Sub[2]) > 0 && Number(m1Sub[1]) !== Number(m1Sub[2])) {
+        for (let t = 0; t < 40; t++) {
+          const a = randInt(3, 9);
+          const b = randInt(1, a - 1);
+          const cExpr = `${a} - ${b}`;
+          if (isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(a - b), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 10 - 1けた / 10台 - 1けたのひき算（くり下がりあり / なし維持）
+      const mTeenSub = expr.match(/^(1\d)\s*-\s*(\d)$/);
+      if (mTeenSub && Number(mTeenSub[2]) > 0) {
+        const origA = Number(mTeenSub[1]);
+        const origB = Number(mTeenSub[2]);
+        if (origA === 10) {
+          for (let t = 0; t < 30; t++) {
+            const b = randInt(1, 9);
+            const cExpr = `10 - ${b}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(10 - b), unit, hissan, sourcePrintId };
+            }
+          }
+        } else {
+          const hasBorrow = (origA - 10) < origB;
+          for (let t = 0; t < 45; t++) {
+            const a = randInt(11, 18);
+            const b = randInt(2, 9);
+            const okBorrow = hasBorrow ? ((a - 10) < b) : ((a - 10) >= b);
+            const cExpr = `${a} - ${b}`;
+            if (okBorrow && isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(a - b), unit, hissan, sourcePrintId };
+            }
+          }
+        }
+      }
+
+      // 3つの数の計算（a op1 b op2 c）
+      const mThree = expr.match(/^(\d+)\s*([+\-])\s*(\d+)\s*([+\-])\s*(\d+)$/);
+      if (mThree) {
+        const op1 = mThree[2];
+        const op2 = mThree[4];
+        const isTeenStart = Number(mThree[1]) >= 10;
+        for (let t = 0; t < 50; t++) {
+          const n1 = isTeenStart ? randInt(10, 19) : randInt(3, 9);
+          const n2 = randInt(1, 7);
+          const mid = op1 === '+' ? n1 + n2 : n1 - n2;
+          if (mid < 1) continue;
+          const n3 = randInt(1, 7);
+          const fin = op2 === '+' ? mid + n3 : mid - n3;
+          if (fin < 0 || fin > 20) continue;
+          const cExpr = `${n1} ${op1} ${n2} ${op2} ${n3}`;
+          if (isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(fin), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 2けた±1けた（暗算：くり上がり・くり下がりの有無を維持）
+      if (!hissan) {
+        const mTwoOneAdd = expr.match(/^(\d{2})\s*\+\s*(\d)$/);
+        if (mTwoOneAdd) {
+          const hasCarry = (Number(mTwoOneAdd[1]) % 10) + Number(mTwoOneAdd[2]) >= 10;
+          for (let t = 0; t < 45; t++) {
+            const tens = randInt(1, 8) * 10;
+            const ones = randInt(1, 9);
+            const c = randInt(1, 9);
+            const okCarry = hasCarry ? (ones + c >= 10) : (ones + c < 10);
+            const cExpr = `${tens + ones} + ${c}`;
+            if (okCarry && isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(tens + ones + c), unit, hissan, sourcePrintId };
+            }
+          }
+        }
+        const mTwoOneSub = expr.match(/^(\d{2})\s*-\s*(\d)$/);
+        if (mTwoOneSub) {
+          const hasBorrow = (Number(mTwoOneSub[1]) % 10) < Number(mTwoOneSub[2]);
+          for (let t = 0; t < 45; t++) {
+            const tens = randInt(2, 9) * 10;
+            const ones = randInt(0, 9);
+            const c = randInt(1, 9);
+            const okBorrow = hasBorrow ? (ones < c) : (ones >= c);
+            const cExpr = `${tens + ones} - ${c}`;
+            if (okBorrow && isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(tens + ones - c), unit, hissan, sourcePrintId };
+            }
+          }
+        }
+      }
+
+      // かけ算九九
+      const mKuku = expr.match(/^(\d)\s*×\s*(\d)$/);
+      if (mKuku) {
+        const a = Number(mKuku[1]);
+        for (let t = 0; t < 30; t++) {
+          const b = randInt(2, 9);
+          const cExpr = `${a} × ${b}`;
+          if (isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(a * b), unit, hissan, sourcePrintId };
+          }
+        }
+        for (let t = 0; t < 40; t++) {
+          const ra = randInt(2, 9);
+          const rb = randInt(2, 9);
+          const cExpr = `${ra} × ${rb}`;
+          if (isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(ra * rb), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 余りのあるわり算（整数）
+      if (String(origProb.ans || '').includes('あまり') && !expr.includes('.')) {
+        const mRem = expr.match(/^(\d+)\s*÷\s*(\d+)$/);
+        if (mRem) {
+          const b = Number(mRem[2]);
+          for (let t = 0; t < 40; t++) {
+            const q = randInt(2, 9);
+            const r = randInt(1, b - 1);
+            const a = b * q + r;
+            const cExpr = `${a} ÷ ${b}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: `${q} あまり ${r}`, unit, hissan, sourcePrintId };
+            }
+          }
+        }
+      }
+
+      // 余りのない整数わり算
+      const mIntDiv = expr.match(/^(\d+)\s*÷\s*(\d+)$/);
+      if (mIntDiv && !String(origProb.ans || '').includes('あまり') && !unit.includes('概数')) {
+        const origA = Number(mIntDiv[1]);
+        const b = Number(mIntDiv[2]);
+        if (b >= 2 && b <= 9 && origA > 0) {
+          const minQ = origA >= 100 ? 25 : (origA >= 30 ? 11 : 2);
+          const maxQ = origA >= 100 ? 95 : (origA >= 30 ? 32 : 9);
+          for (let t = 0; t < 40; t++) {
+            const q = randInt(minQ, maxQ);
+            const a = b * q;
+            const cExpr = `${a} ÷ ${b}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(q), unit, hissan, sourcePrintId };
+            }
+          }
+        }
+      }
+
+      // 整数の筆算（2〜3けたのたし算・ひき算、1000からのひき算）
+      const mIntAddSub = expr.match(/^(\d{1,4})\s*([+\-])\s*(\d{1,3})$/);
+      if (mIntAddSub && !unit.includes('概数')) {
+        const origA = Number(mIntAddSub[1]);
+        const op = mIntAddSub[2];
+        const lenA = mIntAddSub[1].length;
+        const lenB = mIntAddSub[3].length;
+        if (origA === 1000 && op === '-') {
+          for (let t = 0; t < 40; t++) {
+            const b = lenB === 2 ? randInt(12, 89) : randInt(123, 876);
+            const cExpr = `1000 - ${b}`;
+            if (isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(1000 - b), unit, hissan, sourcePrintId };
+            }
+          }
+        } else if (lenA >= 2 || lenB >= 2) {
+          for (let t = 0; t < 45; t++) {
+            const a = lenA === 3 ? randInt(125, 785) : (lenA === 2 ? randInt(24, 89) : randInt(3, 9));
+            const b = lenB === 3 ? randInt(115, 650) : (lenB === 2 ? randInt(14, 78) : randInt(3, 9));
+            const cExpr = `${a} ${op} ${b}`;
+            if (op === '+' && isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(a + b), unit, hissan, sourcePrintId };
+            }
+            if (op === '-' && a > b + 12 && isAllowedExpr(cExpr)) {
+              return { expr: cExpr, ans: String(a - b), unit, hissan, sourcePrintId };
+            }
+          }
+        }
+      }
+
+      // かけ算の筆算（2けた×1けた、3けた×1けた、2けた×2けた）
+      const mIntMul = expr.match(/^(\d{2,3})\s*×\s*(\d{1,2})$/);
+      if (mIntMul && !unit.includes('概数')) {
+        const lenA = mIntMul[1].length;
+        const lenB = mIntMul[2].length;
+        for (let t = 0; t < 45; t++) {
+          const a = lenA === 3 ? randInt(123, 689) : randInt(14, 89);
+          const b = lenB === 2 ? randInt(13, 68) : randInt(3, 9);
+          const cExpr = `${a} × ${b}`;
+          if (isAllowedExpr(cExpr)) {
+            return { expr: cExpr, ans: String(a * b), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 小数のたし算・ひき算
+      const mDecAddSub = expr.match(/^(\d+(?:\.\d+)?)\s*([+\-])\s*(\d+(?:\.\d+)?)$/);
+      if (mDecAddSub && expr.includes('.')) {
+        const op = mDecAddSub[2];
+        const aHasDec = mDecAddSub[1].includes('.');
+        const bHasDec = mDecAddSub[3].includes('.');
+        for (let t = 0; t < 45; t++) {
+          const aT = aHasDec ? randInt(12, 88) : randInt(3, 9) * 10;
+          const bT = bHasDec ? randInt(11, 68) : randInt(2, 7) * 10;
+          const aStr = aHasDec ? (aT / 10).toFixed(1) : String(aT / 10);
+          const bStr = bHasDec ? (bT / 10).toFixed(1) : String(bT / 10);
+          const cExpr = `${aStr} ${op} ${bStr}`;
+          if (op === '+' && isAllowedExpr(cExpr)) {
+            const res = (aT + bT) / 10;
+            return { expr: cExpr, ans: String(res), unit, hissan, sourcePrintId };
+          }
+          if (op === '-' && aT > bT + 5 && isAllowedExpr(cExpr)) {
+            const res = (aT - bT) / 10;
+            return { expr: cExpr, ans: String(res), unit, hissan, sourcePrintId };
+          }
+        }
+      }
+
+      // 同単元の別問題を全プリントから検索（excludeExprs に含まれないものを優先）
+      const sameUnitPool = [];
+      Object.entries(PROBLEMS_BY_PRINT).forEach(([pidStr, list]) => {
+        const pid = Number(pidStr);
+        list.forEach(p => {
+          if (p.unit === unit && isAllowedExpr(p.expr)) {
+            sameUnitPool.push({ ...p, sourcePrintId: pid });
           }
         });
       });
-      if (candidates.length > 0) {
-        const picked = candidates[Math.floor(Math.random() * candidates.length)];
-        return { ...picked };
+      if (sameUnitPool.length > 0) {
+        return sameUnitPool[Math.floor(Math.random() * sameUnitPool.length)];
       }
 
-      return { ...origProb };
-    }
-
-    function ensurePracticeProblem(qIdx) {
-      if (!practiceStates[qIdx]) {
-        const simProb = generateSimilarProblem(activeProblems[qIdx]);
-        const initAns = createEmptyAnswerState();
-        if (String(simProb.ans).includes('あまり')) {
-          initAns.mode = 'amari';
-          initAns.activePart = 'q';
-        } else if (String(simProb.ans).includes(':')) {
-          initAns.mode = 'ratio';
-          initAns.activePart = 'left';
-        } else if (String(simProb.ans).includes('と') && String(simProb.ans).includes('/')) {
-          initAns.mode = 'mixed';
-          initAns.activePart = 'whole';
-        } else if (String(simProb.ans).includes('/')) {
-          initAns.mode = 'fraction';
-          initAns.activePart = 'num';
-        }
-        practiceStates[qIdx] = {
-          prob: simProb,
-          ansObj: initAns,
-          checked: false,
-          correct: false
-        };
-      }
-      return practiceStates[qIdx];
+      return { ...origProb, sourcePrintId };
     }
 
     function buildPracticeBoxHtml(qIdx) {
-      const pState = ensurePracticeProblem(qIdx);
-      const sim = pState.prob;
+      const ps = practiceStates[qIdx];
+      if (!ps) return '';
 
-      let statusHtml = '';
-      if (pState.checked) {
-        if (pState.correct) {
-          statusHtml = `<div class="mt-2 text-xs sm:text-sm font-extrabold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-xl border border-emerald-300">⭕ だいせいかい！ ばっちり わかったね！</div>`;
-        } else {
-          statusHtml = `<div class="mt-2 text-xs sm:text-sm font-extrabold text-rose-700 bg-rose-100 px-3 py-1.5 rounded-xl border border-rose-300 flex items-center flex-wrap gap-1"><span>❌ おしい！ ただしい こたえは</span><span class="font-num text-base">${formatMathExpression(sim.ans)}</span><span>だよ。</span></div>`;
-        }
-      }
+      const pStatus = ps.checked
+        ? (ps.correct
+            ? `<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-extrabold">🎉 れんしゅう せいかい！</span>`
+            : `<span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300 text-xs font-extrabold">もういちど チャレンジ！</span>`)
+        : `<span class="text-[11px] font-bold text-blue-700">わくを タップして といてみよう</span>`;
 
-      const simNoteHtml = sim.note ? `<div class="text-[11px] font-bold text-blue-800 mb-1">${sim.note}</div>` : '';
+      const pAnsReveal = (ps.checked && !ps.correct)
+        ? `<div class="text-xs font-extrabold text-rose-600 mt-1">こたえ：${formatMathExpression(ps.prob.ans)}</div>`
+        : '';
 
       return `
-        <div onclick="focusAnswerInput(${qIdx}, 'practice', null, true); event.stopPropagation();" class="mt-3 p-3 rounded-2xl bg-blue-50/90 border-2 border-blue-300 space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-extrabold text-blue-800">🎯 にてる もんだいに ちょうせん！</span>
-            <button type="button" onclick="checkPracticeAnswer(${qIdx}); event.stopPropagation();" class="px-3 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-sm transition">
-              ✓ こたえあわせ
-            </button>
+        <div onclick="focusAnswerInput(${qIdx}, 'practice', null, true); event.stopPropagation();" class="mt-3 p-3 rounded-2xl bg-blue-50/80 border-2 border-blue-300 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1.5">
+            <span class="text-xs sm:text-sm font-extrabold text-blue-900">🔥 にた問題で れんしゅうしよう！</span>
+            ${pStatus}
           </div>
-          ${simNoteHtml}
+          ${ps.prob.note ? `<div class="text-xs font-bold text-slate-600">${ps.prob.note}</div>` : ''}
           <div class="flex flex-wrap items-center gap-2">
-            <span class="text-xl sm:text-2xl font-extrabold font-num text-slate-800">${formatMathExpression(sim.expr)} ＝</span>
-            ${buildPracticeAnswerInputHtml(qIdx, pState.ansObj)}
+            <div class="text-xl sm:text-2xl font-extrabold font-num text-slate-800">
+              ${formatMathExpression(ps.prob.expr)} <span class="text-slate-400 mx-1">＝</span>
+            </div>
+            ${buildPracticeAnswerInputHtml(qIdx, ps.ansObj)}
           </div>
-          ${statusHtml}
+          ${pAnsReveal}
         </div>
       `;
     }
 
     function checkPracticeAnswer(qIdx) {
-      const pState = practiceStates[qIdx];
-      if (!pState) return;
-      const uStr = formatAnswerStateToString(pState.ansObj);
-      pState.checked = true;
-      pState.correct = checkAnswerMatch(uStr, pState.prob.ans);
+      const ps = practiceStates[qIdx];
+      if (!ps) return;
+      const uStr = formatAnswerStateToString(ps.ansObj);
+      if (!uStr) {
+        showToast('こたえを にゅうりょく してから 採点しよう！');
+        return;
+      }
+      ps.checked = true;
+      ps.correct = checkAnswerMatch(uStr, ps.prob.ans);
+      if (ps.correct) {
+        showToast('🎉 れんしゅう問題 せいかい！ばっちりだね！');
+      } else {
+        showToast('おしい！ヒントを みて もういちど やってみよう！');
+      }
       renderProblems();
     }
 
-    // にがて克服5問ミニドリル開始
-    function startMiniDrill(weakUnits) {
-      const pool = [];
-      Object.entries(PROBLEMS_BY_PRINT).forEach(([pidStr, arr]) => {
-        const pid = Number(pidStr);
-        arr.forEach(p => {
-          if (weakUnits.includes(p.unit)) {
-            pool.push({ ...p, sourcePrintId: pid });
-          }
-        });
-      });
+    // 5もん集中ミニドリル開始
+    function startFiveQuestionMiniDrill() {
+      if (!gradingResults) return;
+      const wrongProbs = activeProblems.filter((_, idx) => !gradingResults[idx].correct);
+      if (wrongProbs.length === 0) return;
 
-      const picked = [];
-      const shuffled = pool.sort(() => Math.random() - 0.5);
-      for (let i = 0; i < Math.min(5, shuffled.length); i++) {
-        const sim = generateSimilarProblem(shuffled[i]);
-        sim.sourcePrintId = shuffled[i].sourcePrintId;
-        picked.push(sim);
+      const drillList = [];
+      const usedExprs = new Set(wrongProbs.map(p => p.expr));
+      let cursor = 0;
+      while (drillList.length < 5) {
+        const base = wrongProbs[cursor % wrongProbs.length];
+        const sim = generateSimilarProblem(base, usedExprs);
+        usedExprs.add(sim.expr);
+        drillList.push(sim);
+        cursor++;
       }
-      if (picked.length === 0) return;
 
       isMiniDrillMode = true;
       isReviewDrillMode = false;
       reviewHintsOpen = {};
-      currentPrintTitle = "🔥 にがてこくふく 5もんミニドリル";
-      activeProblems = picked;
+      currentPrintTitle = `${currentPrintTitle}（5もんミニドリル）`;
+      activeProblems = drillList;
       initUserAnswers(activeProblems.length);
 
       document.getElementById('mini-drill-banner').classList.remove('hidden');
@@ -3923,329 +4218,210 @@
 
       renderProblems();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('🔥 5もん しゅうちゅうミニドリル スタート！');
     }
 
     // =========================================================================
-    // 9. 学習履歴保存・じぶんのきろく（間違い傾向分析＆10問復習ドリル）・担任ダッシュボード・スクショ撮影
+    // 9. スクリーンショット撮影機能
     // =========================================================================
-    function saveRecordToHistory(score, correctCount, total, weakUnits) {
-      const grade = document.getElementById('student-grade').value || '未選択';
-      const cls = document.getElementById('student-class').value || '未選択';
-      const num = document.getElementById('student-number').value || '未選択';
-      const name = document.getElementById('student-name').value.trim() || 'なまえなし';
+    async function captureResultScreenshot() {
+      if (typeof html2canvas === 'undefined') {
+        showToast('スクリーンショット機能を よみこみ中です');
+        return;
+      }
+      const target = document.getElementById('capture-area');
+      if (!target) return;
 
-      const rec = {
-        id: Date.now(),
-        createdAtMs: Date.now(),
-        timestamp: new Date().toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        classId: activeClassCode || '',
-        grade,
-        cls,
-        num,
-        name,
-        printId: currentPrintId,
-        printTitle: currentPrintTitle,
-        isReviewDrill: isReviewDrillMode,
-        score,
-        correctCount,
-        total,
-        weakUnits
-      };
-
-      historyRecords.unshift(rec);
+      showToast('📸 スクリーンショットを とっています...');
       try {
-        localStorage.setItem('keisan_batchiri_records_v1', JSON.stringify(historyRecords));
-      } catch (e) {
-        console.warn('localStorage save skipped', e);
-      }
-
-      if (typeof window.__saveRecordToCloud === 'function') {
-        window.__saveRecordToCloud(rec);
+        const canvas = await html2canvas(target, {
+          scale: Math.min(window.devicePixelRatio || 1.5, 2),
+          useCORS: true,
+          backgroundColor: '#f4f7fb'
+        });
+        const dataUrl = canvas.toDataURL('image/png');
+        const imgEl = document.getElementById('screenshot-preview-img');
+        const modal = document.getElementById('screenshot-modal');
+        if (imgEl && modal) {
+          imgEl.src = dataUrl;
+          modal.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error('Screenshot failed:', err);
+        showToast('スクリーンショットの さくせいに しっぱいしました');
       }
     }
 
-    function switchMode(mode) {
-      if (mode === 'teacher' && isStudentOnlyView) return;
-      const views = {
-        study: document.getElementById('view-study'),
-        record: document.getElementById('view-record'),
-        teacher: document.getElementById('view-teacher')
-      };
-      const tabs = {
-        study: document.getElementById('tab-study'),
-        record: document.getElementById('tab-record'),
-        teacher: document.getElementById('tab-teacher')
-      };
-
-      Object.keys(views).forEach(k => {
-        if (k === 'teacher' && isStudentOnlyView) {
-          views[k].classList.add('hidden');
-          tabs[k].classList.add('hidden');
-          return;
-        }
-        if (k === mode) {
-          views[k].classList.remove('hidden');
-          tabs[k].className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition bg-white text-blue-600 shadow-sm';
-        } else {
-          views[k].classList.add('hidden');
-          tabs[k].className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition text-slate-600 hover:text-slate-900';
-        }
-      });
-
-      if (mode === 'record') renderRecordView();
-      if (mode === 'teacher') renderTeacherView();
+    function closeScreenshotModal() {
+      const modal = document.getElementById('screenshot-modal');
+      if (modal) modal.classList.add('hidden');
     }
 
-    // 単元名から大きな計算領域（ドメイン）を判定
-    function getMathDomainFromUnit(unit) {
-      const u = String(unit || '');
-      if (u.includes('分数')) return '分数の計算';
-      if (u.includes('小数')) return '小数の計算';
-      if (u.includes('比')) return '比の計算';
-      if (u.includes('概数')) return 'がい数の計算';
-      if (u.includes('(') || u.includes('3つの数')) return '式と計算のじゅんじょ';
+    // =========================================================================
+    // 10. 「じぶんのきろく」＆ 復習ドリル（1つだけ表示・回数ごとに別問題・別領域編成）
+    // =========================================================================
+    // 単元名から計算領域カテゴリを判定
+    function getMathDomainCategory(unitName) {
+      const u = String(unitName || '');
+      if (u.includes('比')) return '比';
+      if (u.includes('分数')) return '分数';
+      if (u.includes('小数')) return '小数';
+      if (u.includes('概数')) return 'がい数';
       if (u.includes('わり算')) return 'わり算';
       if (u.includes('かけ算') || u.includes('九九')) return 'かけ算';
       if (u.includes('ひき算')) return 'ひき算';
       if (u.includes('たし算')) return 'たし算';
-      return '基本の計算';
+      return '式の計算';
     }
 
-    // 児童の学習履歴・選択学年から適切なプリントID範囲（minPid〜maxPid）を推定
-    function getStudentTargetPrintRange() {
-      const pids = historyRecords
-        .map(r => Number(r.printId))
-        .filter(id => id >= 1 && id <= 48);
+    // 児童の学習履歴から「今のその子に必要な10問の復習ドリル」を1つ自動編成
+    function buildPersonalizedReviewDrillPlan() {
+      const nextAttemptNo = reviewDrillAttemptCount + 1;
+      const gradeVal = document.getElementById('student-grade')?.value || '';
+      const maxPid = getMaxAllowedPrintIdForGrade(gradeVal);
 
-      if (pids.length > 0) {
-        const maxPid = Math.max(...pids);
-        const minPid = Math.max(1, Math.min(...pids) - 3);
-        return { minPid, maxPid };
-      }
-
-      const gradeVal = (document.getElementById('student-grade')?.value || '');
-      const gradeRanges = {
-        '1年': { minPid: 1, maxPid: 3 },
-        '2年': { minPid: 4, maxPid: 12 },
-        '3年': { minPid: 13, maxPid: 21 },
-        '4年': { minPid: 22, maxPid: 30 },
-        '5年': { minPid: 31, maxPid: 39 },
-        '6年': { minPid: 40, maxPid: 48 }
-      };
-      return gradeRanges[gradeVal] || { minPid: 1, maxPid: 48 };
-    }
-
-    // 2回目・3回目と繰り返すたびに違う問題・違う領域から必要な10問を編成する
-    function prepareNextReviewDrillPlan() {
-      if (historyRecords.length === 0) {
-        nextReviewDrillPlan = null;
-        return null;
-      }
-
-      const attemptNo = reviewDrillAttemptCount + 1;
-      const { minPid, maxPid } = getStudentTargetPrintRange();
-
-      // 履歴から単元ごとの誤答傾向と直近度を分析
-      const unitStats = {};
-      historyRecords.forEach((r, recIdx) => {
-        const recWeight = r.isReviewDrill ? 1.2 : 1.0;
-        (r.weakUnits || []).forEach(u => {
-          if (!unitStats[u]) {
-            unitStats[u] = { unit: u, count: 0, lastIdx: recIdx, domain: getMathDomainFromUnit(u) };
-          }
-          unitStats[u].count += recWeight;
-          unitStats[u].lastIdx = Math.min(unitStats[u].lastIdx, recIdx);
-        });
-      });
-
-      const lastDomains = new Set(lastReviewUnits.map(u => getMathDomainFromUnit(u)));
-      const weakEntries = Object.values(unitStats);
-
-      // 各単元に優先度スコアを付与（2回目以降は前回出した単元・領域をローテーション）
-      weakEntries.forEach(item => {
-        const recencyBonus = Math.max(0, 8 - item.lastIdx) * 1.5;
-        let penalty = 0;
-        if (attemptNo >= 2) {
-          if (lastReviewUnits.includes(item.unit)) penalty += 14;
-          if (lastDomains.has(item.domain)) penalty += 6;
+      // 1. 過去の履歴から単元ごとの間違い回数・直近ミスを収集
+      const unitMistakeCounts = {};
+      const recentWrongProblems = [];
+      historyRecords.forEach(rec => {
+        if (Array.isArray(rec.weakUnits)) {
+          rec.weakUnits.forEach(u => {
+            unitMistakeCounts[u] = (unitMistakeCounts[u] || 0) + 1;
+          });
         }
-        item.priority = item.count * 10 + recencyBonus - penalty;
-      });
-      weakEntries.sort((a, b) => b.priority - a.priority);
-
-      // 学習範囲内の全単元プール（関連領域の補完・100点児童のステップアップ用）
-      const gradeUnitsMap = {};
-      for (let pid = minPid; pid <= maxPid; pid++) {
-        (PROBLEMS_BY_PRINT[pid] || []).forEach(p => {
-          if (!gradeUnitsMap[p.unit]) {
-            gradeUnitsMap[p.unit] = { unit: p.unit, domain: getMathDomainFromUnit(p.unit), samplePid: pid };
-          }
-        });
-      }
-      const allGradeUnits = Object.values(gradeUnitsMap);
-
-      // 出題ターゲットとなる単元リスト（最大4単元・複数領域をバランスよく選定）
-      const targetUnits = [];
-      const chosenDomains = new Set();
-
-      // 1) 苦手単元から異なる領域を優先して選ぶ
-      weakEntries.forEach(item => {
-        if (targetUnits.length >= 4) return;
-        if (!chosenDomains.has(item.domain) || targetUnits.length < 2) {
-          targetUnits.push(item.unit);
-          chosenDomains.add(item.domain);
-        }
-      });
-      // まだ枠があれば残りの苦手単元を追加
-      weakEntries.forEach(item => {
-        if (targetUnits.length < 4 && !targetUnits.includes(item.unit)) {
-          targetUnits.push(item.unit);
-          chosenDomains.add(item.domain);
+        if (Array.isArray(rec.wrongItems)) {
+          rec.wrongItems.forEach(w => {
+            recentWrongProblems.push(w);
+          });
         }
       });
 
-      // 2) 2回目以降や苦手単元が少ない場合は、同学年範囲の「別の計算領域」も補完して幅広く力をつける
-      if (targetUnits.length < 3 || (attemptNo >= 2 && chosenDomains.size < 2)) {
-        const shuffledGradeUnits = [...allGradeUnits].sort(() => Math.random() - 0.5);
-        // まず前回と違う領域・未選択の領域を優先
-        shuffledGradeUnits.forEach(gu => {
-          if (targetUnits.length >= 4) return;
-          if (!targetUnits.includes(gu.unit) && !chosenDomains.has(gu.domain) && !lastDomains.has(gu.domain)) {
-            targetUnits.push(gu.unit);
-            chosenDomains.add(gu.domain);
-          }
-        });
-        shuffledGradeUnits.forEach(gu => {
-          if (targetUnits.length >= 4) return;
-          if (!targetUnits.includes(gu.unit) && !chosenDomains.has(gu.domain)) {
-            targetUnits.push(gu.unit);
-            chosenDomains.add(gu.domain);
-          }
-        });
-        shuffledGradeUnits.forEach(gu => {
-          if (targetUnits.length >= 3) return;
-          if (!targetUnits.includes(gu.unit)) {
-            targetUnits.push(gu.unit);
-          }
-        });
-      }
-
-      // 単元ごとに問題候補を収集（同学年範囲を優先）
-      const buckets = {};
-      targetUnits.forEach(u => { buckets[u] = []; });
-
-      Object.entries(PROBLEMS_BY_PRINT).forEach(([pidStr, arr]) => {
+      // 2. 全問題プールから、現在の学年範囲内の候補を収集
+      const allPool = [];
+      Object.entries(PROBLEMS_BY_PRINT).forEach(([pidStr, list]) => {
         const pid = Number(pidStr);
-        if (pid < minPid || pid > maxPid) return;
-        arr.forEach(p => {
-          if (buckets[p.unit]) {
-            buckets[p.unit].push({ ...p, sourcePrintId: pid });
-          }
+        if (pid > maxPid) return;
+        list.forEach(p => {
+          allPool.push({
+            expr: p.expr,
+            ans: p.ans,
+            unit: p.unit,
+            note: p.note || '',
+            hissan: Boolean(p.hissan),
+            sourcePrintId: pid,
+            domain: getMathDomainCategory(p.unit)
+          });
         });
       });
 
-      // 範囲外にも同単元があれば補完
-      Object.entries(PROBLEMS_BY_PRINT).forEach(([pidStr, arr]) => {
-        const pid = Number(pidStr);
-        arr.forEach(p => {
-          if (buckets[p.unit] && buckets[p.unit].length < 4) {
-            buckets[p.unit].push({ ...p, sourcePrintId: pid });
-          }
-        });
+      // 3. 候補に優先度スコアを付与（未出題を最優先、前回と違う単元・領域を優遇）
+      const lastUnitSet = new Set(lastReviewUnits || []);
+      const lastDomainSet = new Set((lastReviewUnits || []).map(u => getMathDomainCategory(u)));
+
+      const scoredPool = allPool.map(item => {
+        const isAlreadyUsed = usedReviewExpressions.has(item.expr);
+        const mistakeWeight = unitMistakeCounts[item.unit] || 0;
+        const isDifferentUnitFromLast = !lastUnitSet.has(item.unit);
+        const isDifferentDomainFromLast = !lastDomainSet.has(item.domain);
+
+        let priority = 0;
+        if (!isAlreadyUsed) priority += 100;
+        if (isDifferentDomainFromLast) priority += 35;
+        if (isDifferentUnitFromLast) priority += 25;
+        priority += Math.min(mistakeWeight * 15, 45);
+        priority += Math.random() * 20;
+
+        return { ...item, priority, isAlreadyUsed };
       });
 
-      // 各単元から未使用問題を優先してラウンドロビンで10問抽出
-      const selectedProblems = [];
-      const selectedExprSet = new Set();
+      scoredPool.sort((a, b) => b.priority - a.priority);
 
-      targetUnits.forEach(u => {
-        buckets[u] = buckets[u].sort(() => Math.random() - 0.5);
-      });
+      const selected = [];
+      const pickedExprs = new Set();
+      const domainCounts = {};
 
-      let safetyLoop = 0;
-      while (selectedProblems.length < 10 && targetUnits.length > 0 && safetyLoop < 60) {
-        const u = targetUnits[safetyLoop % targetUnits.length];
-        safetyLoop++;
-        const list = buckets[u] || [];
-        if (list.length === 0) continue;
+      // 領域が偏らないように最大10問を選出（1領域あたり最大3問まで）
+      for (const cand of scoredPool) {
+        if (selected.length >= 10) break;
+        if (pickedExprs.has(cand.expr)) continue;
+        const dCount = domainCounts[cand.domain] || 0;
+        if (dCount >= 3) continue;
 
-        // 未使用の既存問題を探索
-        let picked = list.find(p => {
-          const k = `${p.expr}__${p.unit}`;
-          return !usedReviewExpressions.has(k) && !selectedExprSet.has(p.expr);
+        pickedExprs.add(cand.expr);
+        domainCounts[cand.domain] = dCount + 1;
+        selected.push({
+          expr: cand.expr,
+          ans: cand.ans,
+          unit: cand.unit,
+          note: cand.note,
+          hissan: cand.hissan,
+          sourcePrintId: cand.sourcePrintId
         });
-
-        // 未使用がなければ類題を自動生成して違う問題にする
-        if (!picked) {
-          const base = list[Math.floor(Math.random() * list.length)];
-          const sim = generateSimilarProblem(base);
-          sim.sourcePrintId = base.sourcePrintId;
-          if (!selectedExprSet.has(sim.expr) && !usedReviewExpressions.has(`${sim.expr}__${sim.unit}`)) {
-            picked = sim;
-          } else if (!selectedExprSet.has(base.expr)) {
-            picked = base;
-          }
-        }
-
-        if (picked && !selectedExprSet.has(picked.expr)) {
-          selectedExprSet.add(picked.expr);
-          selectedProblems.push(picked);
-        }
       }
 
-      if (selectedProblems.length === 0) {
-        nextReviewDrillPlan = null;
-        return null;
+      // 10問に満たない場合は、既存問題から類題を自動生成して補充
+      let fallbackIdx = 0;
+      const baseForGen = recentWrongProblems.length > 0 ? recentWrongProblems : selected;
+      while (selected.length < 10 && baseForGen.length > 0) {
+        const base = baseForGen[fallbackIdx % baseForGen.length];
+        const sim = generateSimilarProblem(base, pickedExprs);
+        pickedExprs.add(sim.expr);
+        selected.push(sim);
+        fallbackIdx++;
       }
 
-      const displayUnits = Array.from(new Set(selectedProblems.map(p => p.unit)));
-      const displayDomains = Array.from(new Set(selectedProblems.map(p => getMathDomainFromUnit(p.unit))));
+      const coveredDomains = Array.from(new Set(selected.map(p => getMathDomainCategory(p.unit))));
+      const focusUnits = Array.from(new Set(selected.map(p => p.unit)));
 
-      nextReviewDrillPlan = {
-        attemptNo,
-        problems: selectedProblems,
-        displayUnits,
-        displayDomains,
-        hasWeakHistory: weakEntries.length > 0
+      return {
+        attemptNo: nextAttemptNo,
+        title: `あなたにぴったりの ふくしゅうドリル（だい${nextAttemptNo}かいめ・10もん）`,
+        problems: selected.slice(0, 10),
+        coveredDomains,
+        focusUnits,
+        hasPastMistakes: Object.keys(unitMistakeCounts).length > 0
       };
-      return nextReviewDrillPlan;
     }
 
-    // 「じぶんのきろく」に表示された1つの復習ドリル（10問）を開始する
-    function startSingleReviewDrill() {
-      const plan = nextReviewDrillPlan || prepareNextReviewDrillPlan();
-      if (!plan || !plan.problems || plan.problems.length === 0) {
-        showToast('ふくしゅうもんだいが みつかりませんでした');
-        return;
-      }
+    function startPersonalizedReviewDrill() {
+      const plan = nextReviewDrillPlan || buildPersonalizedReviewDrillPlan();
+      if (!plan || !plan.problems || plan.problems.length === 0) return;
 
+      // 実施回数・出題済み式・出題単元を記録（次回はまた違う問題・領域になる）
       reviewDrillAttemptCount = plan.attemptNo;
-      lastReviewUnits = [...plan.displayUnits];
-      plan.problems.forEach(p => {
-        usedReviewExpressions.add(`${p.expr}__${p.unit}`);
-      });
+      plan.problems.forEach(p => usedReviewExpressions.add(p.expr));
+      lastReviewUnits = plan.focusUnits;
       saveUsedReviewExpressions();
       saveReviewDrillMeta();
-
-      switchMode('study');
 
       isMiniDrillMode = false;
       isReviewDrillMode = true;
       reviewHintsOpen = {};
-      currentPrintTitle = `🎯 ふくしゅうドリル（第${plan.attemptNo}かい・${plan.problems.length}もん）`;
+      currentPrintId = null;
+      currentPrintTitle = plan.title;
       activeProblems = plan.problems.map(p => ({ ...p }));
       initUserAnswers(activeProblems.length);
 
-      document.getElementById('top-welcome-screen').classList.add('hidden');
-      document.getElementById('study-workspace').classList.remove('hidden');
+      switchMode('study');
+
+      const welcome = document.getElementById('top-welcome-screen');
+      const workspace = document.getElementById('study-workspace');
       const badge = document.getElementById('active-print-badge');
+      const miniBanner = document.getElementById('mini-drill-banner');
+      const bottomBar = document.getElementById('bottom-action-bar');
+      const printSel = document.getElementById('print-select');
+
+      if (printSel) printSel.value = '';
+      welcome.classList.add('hidden');
+      workspace.classList.remove('hidden');
       badge.classList.remove('hidden');
       badge.classList.add('flex');
-      document.getElementById('mini-drill-banner').classList.add('hidden');
+      miniBanner.classList.add('hidden');
+      bottomBar.classList.add('hidden');
+
       document.getElementById('badge-print-title').textContent = currentPrintTitle;
       document.getElementById('badge-print-count').textContent = `ぜんぶで ${activeProblems.length}もん（💡ヒントつき）`;
       document.getElementById('grading-summary-box').classList.add('hidden');
-      document.getElementById('bottom-action-bar').classList.add('hidden');
 
       gradingResults = null;
       practiceStates = {};
@@ -4255,130 +4431,118 @@
       renderProblems();
       setTimeout(resizeMemoCanvas, 40);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      showToast(`第${plan.attemptNo}かい ふくしゅうドリル（${activeProblems.length}もん）を はじめるよ！`);
+      showToast(`🏅 だい${plan.attemptNo}かいめの ふくしゅうドリルを スタート！`);
     }
 
-    // じぶんのきろく（マイダッシュボード）描画
     function renderRecordView() {
-      const grade = document.getElementById('student-grade').value || '';
-      const cls = document.getElementById('student-class').value || '';
-      const num = document.getElementById('student-number').value || '';
-      const name = document.getElementById('student-name').value.trim() || 'ゲスト';
+      const gradeVal = document.getElementById('student-grade')?.value || '';
+      const classVal = document.getElementById('student-class')?.value || '';
+      const numVal = document.getElementById('student-number')?.value || '';
+      const nameVal = document.getElementById('student-name')?.value.trim() || '';
 
-      document.getElementById('record-student-label').textContent = `${grade} ${cls} ${num} ${name}`.trim();
+      const labelParts = [gradeVal, classVal, numVal, nameVal].filter(Boolean);
+      const labelEl = document.getElementById('record-student-label');
+      if (labelEl) {
+        labelEl.textContent = labelParts.length > 0 ? labelParts.join(' ') : 'なまえ 未入力';
+      }
 
       const totalCount = historyRecords.length;
       const perfectCount = historyRecords.filter(r => r.score === 100).length;
       const avgScore = totalCount > 0
-        ? Math.round(historyRecords.reduce((acc, r) => acc + r.score, 0) / totalCount)
-        : '-';
+        ? Math.round(historyRecords.reduce((sum, r) => sum + (Number(r.score) || 0), 0) / totalCount)
+        : null;
 
       document.getElementById('stat-perfect-count').textContent = `${perfectCount}こ`;
       document.getElementById('stat-total-count').textContent = `${totalCount}かい`;
-      document.getElementById('stat-avg-score').textContent = avgScore === '-' ? '-てん' : `${avgScore}てん`;
+      document.getElementById('stat-avg-score').textContent = avgScore !== null ? `${avgScore}てん` : '-てん';
 
-      const plan = prepareNextReviewDrillPlan();
-
+      // 「ふくしゅうドリル」は1つだけ表示（2回目・3回目と繰り返すと違う問題・別領域を自動編成）
+      nextReviewDrillPlan = buildPersonalizedReviewDrillPlan();
       const reviewSection = document.getElementById('review-drills-section');
-      if (reviewSection) {
-        if (!plan) {
-          reviewSection.innerHTML = `
-            <div class="rounded-2xl bg-emerald-50/70 border border-emerald-200 p-4 text-center space-y-1">
-              <div class="text-sm sm:text-base font-extrabold text-emerald-800">🌟 まずは プリントを といてみよう！</div>
-              <div class="text-xs font-bold text-emerald-700">プリントを といて こたえあわせを すると、ここに あなた専用の「ふくしゅうドリル（10もん）」が 1つ できるよ！</div>
+      if (reviewSection && nextReviewDrillPlan) {
+        const domainBadges = nextReviewDrillPlan.coveredDomains
+          .map(d => `<span class="px-2.5 py-0.5 rounded-full bg-white border border-indigo-200 text-indigo-800 text-xs font-extrabold">${d}</span>`)
+          .join('');
+        const subDescHtml = nextReviewDrillPlan.attemptNo === 1
+          ? `<p class="text-xs sm:text-sm font-bold text-slate-700">${
+              nextReviewDrillPlan.hasPastMistakes
+                ? 'これまでの まちがいと 学習バランスから、いま 必要な 10もんを えらんだよ！'
+                : 'いろいろな 計算領域から バランスよく 10もんを えらんだよ！'
+            }</p>`
+          : '';
+
+        reviewSection.innerHTML = `
+          <div class="rounded-2xl bg-gradient-to-r from-indigo-50 via-blue-50 to-sky-50 border-2 border-indigo-200 p-4 sm:p-5 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-indigo-600 text-white text-xs font-extrabold">だい${nextReviewDrillPlan.attemptNo}かいめ</span>
+                <h3 class="text-base sm:text-lg font-extrabold text-indigo-950">🎯 あなたにぴったりの ふくしゅうドリル（10もん）</h3>
+              </div>
+              <span class="text-xs font-extrabold text-indigo-700">💡 とちゅうで ヒントも 見られるよ</span>
             </div>
-          `;
-        } else {
-          const titleText = plan.hasWeakHistory
-            ? '🎯 あなた専用の ふくしゅうドリル（10もん）'
-            : '🌟 ステップアップ ふくしゅうドリル（10もん）';
-          const descText = plan.attemptNo === 1
-            ? 'いま まちがえやすい けいさんを中心に、必要な 10もんを えらんだよ！（💡ヒントつき）'
-            : `第${plan.attemptNo}かいめは、まえと ちがう 問題や べつの けいさん領域も まぜて、いま 必要な 10もんを じゅんびしたよ！（💡ヒントつき）`;
-          const repeatTagHtml = plan.attemptNo >= 2
-            ? `<span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[11px] font-extrabold">🔄 まえとちがう問題・領域</span>`
-            : '';
-
-          const domainBadgesHtml = plan.displayDomains.map(d =>
-            `<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-950 border border-amber-300 text-xs font-extrabold">${d}</span>`
-          ).join('');
-
-          const unitBadgesHtml = plan.displayUnits.map(u =>
-            `<span class="px-2.5 py-0.5 rounded-lg bg-white text-slate-700 border border-amber-200 text-[11px] font-bold">${u}</span>`
-          ).join('');
-
-          reviewSection.innerHTML = `
-            <div class="rounded-2xl bg-gradient-to-br from-amber-50 via-orange-50/70 to-amber-50 border-2 border-amber-300 p-4 sm:p-5 shadow-sm space-y-3.5">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <div class="flex flex-wrap items-center gap-2">
-                  <h3 class="text-base sm:text-lg font-extrabold text-amber-950">${titleText}</h3>
-                  <span class="px-3 py-0.5 rounded-full bg-amber-500 text-white text-xs font-extrabold shadow-xs">第 ${plan.attemptNo} かいめ</span>
-                  ${repeatTagHtml}
-                </div>
-              </div>
-
-              <p class="text-xs sm:text-sm font-bold text-amber-900 leading-relaxed">${descText}</p>
-
-              <div class="bg-white/80 rounded-xl p-3 border border-amber-200/80 space-y-2">
-                <div class="text-xs font-extrabold text-slate-700">📌 こんどの 10もんに 出る けいさん領域・単元：</div>
-                <div class="flex flex-wrap items-center gap-1.5">
-                  ${domainBadgesHtml}
-                </div>
-                <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
-                  ${unitBadgesHtml}
-                </div>
-              </div>
-
-              <button type="button" onclick="startSingleReviewDrill()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm sm:text-base font-extrabold shadow-md transition transform active:scale-98 flex items-center justify-center gap-2">
-                <span>🚀 第 ${plan.attemptNo} かいめ ふくしゅうドリル（${plan.problems.length}もん）を スタート！</span>
+            ${subDescHtml}
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="text-xs font-extrabold text-slate-600">こんかいの 領域：</span>
+              ${domainBadges}
+            </div>
+            <div class="pt-1">
+              <button type="button" onclick="startPersonalizedReviewDrill()" class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-extrabold text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2">
+                <span>🚀 ふくしゅうドリル（だい${nextReviewDrillPlan.attemptNo}かいめ）を はじめる</span>
               </button>
-            </div>
-          `;
-        }
-      }
-
-      const listEl = document.getElementById('record-history-list');
-      if (historyRecords.length === 0) {
-        listEl.innerHTML = `<div class="text-center py-8 text-sm font-bold text-slate-400 bg-slate-50 rounded-2xl border border-slate-200">まだ きろくが ありません。「プリントをとく」から こたえあわせを してみよう！</div>`;
-        return;
-      }
-
-      listEl.innerHTML = historyRecords.map(r => {
-        const badge = r.score === 100
-          ? `<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold">🏅 100てん！</span>`
-          : `<span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold font-num">${r.score}てん</span>`;
-        return `
-          <div class="rounded-2xl border border-slate-200 p-3.5 flex flex-wrap items-center justify-between gap-2 bg-slate-50/60">
-            <div>
-              <div class="text-xs text-slate-400 font-bold">${r.timestamp}</div>
-              <div class="text-sm sm:text-base font-extrabold text-slate-800">${r.printTitle}</div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-slate-600 font-num">${r.correctCount}/${r.total}もん せいかい</span>
-              ${badge}
             </div>
           </div>
         `;
-      }).join('');
+      }
+
+      // 履歴一覧
+      const listEl = document.getElementById('record-history-list');
+      if (listEl) {
+        if (historyRecords.length === 0) {
+          listEl.innerHTML = `<div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center text-sm font-bold text-slate-500">まだ きろくが ないよ。「プリントをとく」から ちょうせんしてみよう！</div>`;
+        } else {
+          listEl.innerHTML = historyRecords.slice(0, 30).map(rec => {
+            const medal = rec.score === 100 ? '🏅' : (rec.score >= 80 ? '🌟' : '📝');
+            return `
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div class="space-y-0.5">
+                  <div class="text-sm font-extrabold text-slate-800">${medal} ${rec.printTitle}</div>
+                  <div class="text-xs font-bold text-slate-500">${rec.timestamp} ・ ${rec.grade} ${rec.cls} ${rec.num} ${rec.name}</div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-slate-600 font-num">${rec.correctCount}/${rec.totalCount}もん</span>
+                  <span class="px-3 py-1 rounded-xl font-num text-base font-black ${rec.score === 100 ? 'bg-amber-100 text-amber-800 border border-amber-300' : 'bg-blue-100 text-blue-800'}">${rec.score}てん</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
     }
 
-    // 担任ダッシュボード用：設定中の学級コードに一致する児童のデータだけを抽出
-    function getFilteredTeacherRecords() {
-      const mergedMap = new Map();
-      [...cloudRecords, ...historyRecords].forEach(r => {
-        const key = `${r.id}_${r.name}_${r.printTitle}_${r.score}`;
-        if (!mergedMap.has(key)) mergedMap.set(key, r);
+    // =========================================================================
+    // 11. 担任ダッシュボード（学級コードフィルタ・単元別つまずき集計・CSV出力）
+    // =========================================================================
+    function getMergedRecordsForTeacher() {
+      const map = new Map();
+      historyRecords.forEach(r => {
+        if (r && r.id) map.set(r.id, r);
       });
-      const allRecords = Array.from(mergedMap.values()).sort((a, b) => (b.createdAtMs || b.id || 0) - (a.createdAtMs || a.id || 0));
+      cloudRecords.forEach(r => {
+        if (r && r.id) map.set(r.id, r);
+      });
+      const all = Array.from(map.values());
+      all.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+      return all;
+    }
 
-      const includeUnassigned = Boolean(document.getElementById('teacher-show-all-toggle')?.checked);
-      if (!activeClassCode) {
-        return allRecords;
-      }
-      return allRecords.filter(r => {
-        const rCode = String(r.classId || '').trim();
-        if (rCode === activeClassCode) return true;
-        if (includeUnassigned && rCode === '') return true;
+    function getFilteredTeacherRecords() {
+      const all = getMergedRecordsForTeacher();
+      const includeUnassigned = document.getElementById('teacher-show-all-toggle')?.checked || false;
+      if (!activeClassCode) return all;
+      return all.filter(rec => {
+        const c = String(rec.classCode || '').trim();
+        if (c === activeClassCode) return true;
+        if (includeUnassigned && c === '') return true;
         return false;
       });
     }
@@ -4390,136 +4554,150 @@
       if (filterBadge) {
         filterBadge.textContent = activeClassCode
           ? `学級コード「${activeClassCode}」の児童のみ`
-          : 'すべての履歴';
+          : 'すべての記録（学級コード未指定）';
       }
 
-      const targetRecords = getFilteredTeacherRecords();
+      const records = getFilteredTeacherRecords();
 
-      const unitMap = {};
-      targetRecords.forEach(r => {
-        (r.weakUnits || []).forEach(u => {
-          unitMap[u] = (unitMap[u] || 0) + 1;
+      // 単元別つまずき集計
+      const unitStatsEl = document.getElementById('teacher-unit-stats');
+      if (unitStatsEl) {
+        const unitFailCounts = {};
+        records.forEach(rec => {
+          if (Array.isArray(rec.weakUnits)) {
+            rec.weakUnits.forEach(u => {
+              unitFailCounts[u] = (unitFailCounts[u] || 0) + 1;
+            });
+          }
         });
-      });
-
-      const unitEl = document.getElementById('teacher-unit-stats');
-      const entries = Object.entries(unitMap).sort((a, b) => b[1] - a[1]);
-      if (entries.length === 0) {
-        unitEl.innerHTML = `<div class="col-span-full text-xs font-bold text-slate-400">この学級のつまずきデータは まだ ありません。</div>`;
-      } else {
-        unitEl.innerHTML = entries.map(([u, cnt]) => `
-          <div class="bg-white rounded-xl p-3 border border-amber-200 flex items-center justify-between gap-2">
-            <span class="text-xs font-extrabold text-slate-700">${u}</span>
-            <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-extrabold shrink-0">誤答 ${cnt}回</span>
-          </div>
-        `).join('');
+        const sortedUnits = Object.entries(unitFailCounts).sort((a, b) => b[1] - a[1]);
+        if (sortedUnits.length === 0) {
+          unitStatsEl.innerHTML = `<div class="col-span-full text-xs font-bold text-slate-500 py-2">まだ つまずきデータがありません（児童が解答すると自動集計されます）。</div>`;
+        } else {
+          unitStatsEl.innerHTML = sortedUnits.slice(0, 9).map(([unitName, cnt]) => `
+            <div class="bg-white rounded-xl p-3 border border-slate-200 flex items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-800 truncate" title="${unitName}">${unitName}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 text-xs font-extrabold shrink-0 font-num">誤答 ${cnt}件</span>
+            </div>
+          `).join('');
+        }
       }
 
-      const tblEl = document.getElementById('teacher-records-table');
-      if (targetRecords.length === 0) {
-        tblEl.innerHTML = `<div class="text-center py-6 text-xs font-bold text-slate-400">学級コード「${activeClassCode || '未設定'}」の提出データはまだありません。上の配布用アドレスを児童に送るとここに自動集計されます。</div>`;
-        return;
-      }
-
-      tblEl.innerHTML = `
-        <table class="w-full text-left border-collapse text-xs sm:text-sm">
-          <thead>
-            <tr class="border-b-2 border-slate-200 text-slate-600">
-              <th class="py-2 px-2">日時</th>
-              <th class="py-2 px-2">学年・組・番号</th>
-              <th class="py-2 px-2">名前</th>
-              <th class="py-2 px-2">プリント</th>
-              <th class="py-2 px-2">得点</th>
-              <th class="py-2 px-2">つまずき単元</th>
+      // 解答履歴テーブル
+      const tableEl = document.getElementById('teacher-records-table');
+      if (tableEl) {
+        if (records.length === 0) {
+          tableEl.innerHTML = `<div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center text-xs sm:text-sm font-bold text-slate-500">この学級コードの提出履歴はまだありません。上の「児童に送るアドレス」をコピーして児童に配付してください。</div>`;
+        } else {
+          const rowsHtml = records.map(rec => `
+            <tr class="border-b border-slate-200 hover:bg-slate-50">
+              <td class="py-2.5 px-3 text-xs font-bold text-slate-600 whitespace-nowrap">${rec.timestamp || ''}</td>
+              <td class="py-2.5 px-3 text-xs font-extrabold text-slate-800 whitespace-nowrap">${rec.grade || ''} ${rec.cls || ''} ${rec.num || ''}</td>
+              <td class="py-2.5 px-3 text-xs font-extrabold text-slate-800 whitespace-nowrap">${rec.name || ''}</td>
+              <td class="py-2.5 px-3 text-xs font-bold text-slate-700">${rec.printTitle || ''}</td>
+              <td class="py-2.5 px-3 text-xs font-black font-num whitespace-nowrap ${rec.score === 100 ? 'text-amber-600' : 'text-blue-700'}">${rec.score}点 (${rec.correctCount}/${rec.totalCount})</td>
+              <td class="py-2.5 px-3 text-xs font-bold text-rose-700">${(rec.weakUnits || []).join('、') || 'なし'}</td>
             </tr>
-          </thead>
-          <tbody>
-            ${targetRecords.map(r => `
-              <tr class="border-b border-slate-100 hover:bg-slate-50">
-                <td class="py-2 px-2 text-slate-500">${r.timestamp}</td>
-                <td class="py-2 px-2 font-bold">${r.grade} ${r.cls} ${r.num}</td>
-                <td class="py-2 px-2 font-extrabold">${r.name}</td>
-                <td class="py-2 px-2">${r.printTitle}</td>
-                <td class="py-2 px-2 font-extrabold font-num text-blue-700">${r.score}点 (${r.correctCount}/${r.total})</td>
-                <td class="py-2 px-2 text-xs text-rose-700">${(r.weakUnits || []).join('、') || 'なし'}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
+          `).join('');
+
+          tableEl.innerHTML = `
+            <table class="w-full text-left border-collapse bg-white rounded-xl overflow-hidden border border-slate-200">
+              <thead>
+                <tr class="bg-slate-100 border-b border-slate-200 text-xs font-extrabold text-slate-700">
+                  <th class="py-2.5 px-3">日時</th>
+                  <th class="py-2.5 px-3">学年・組・番号</th>
+                  <th class="py-2.5 px-3">氏名</th>
+                  <th class="py-2.5 px-3">プリント</th>
+                  <th class="py-2.5 px-3">得点</th>
+                  <th class="py-2.5 px-3">つまずき単元</th>
+                </tr>
+              </thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          `;
+        }
+      }
     }
 
     function exportTeacherCSV() {
-      const targetRecords = getFilteredTeacherRecords();
-      if (targetRecords.length === 0) {
-        showToast('ダウンロードする この学級の履歴データが ありません');
+      const records = getFilteredTeacherRecords();
+      if (records.length === 0) {
+        showToast('ダウンロードする 履歴データが ありません');
         return;
       }
-      const header = ['日時', '学級コード', '学年', '組', '出席番号', '名前', 'プリント名', '得点', '正解数', '問題数', 'つまずき単元'];
-      const rows = targetRecords.map(r => [
-        r.timestamp, r.classId || '', r.grade, r.cls, r.num, r.name, r.printTitle, r.score, r.correctCount, r.total, (r.weakUnits || []).join('/')
-      ]);
-      const csv = '\uFEFF' + [header, ...rows].map(row => row.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const header = ['日時', '学級コード', '学年', '組', '出席番号', '氏名', 'プリント名', '得点', '正解数', '問題数', 'つまずき単元'];
+      const lines = [header.join(',')];
+      records.forEach(r => {
+        const vals = [
+          r.timestamp || '',
+          r.classCode || '',
+          r.grade || '',
+          r.cls || '',
+          r.num || '',
+          r.name || '',
+          r.printTitle || '',
+          r.score ?? '',
+          r.correctCount ?? '',
+          r.totalCount ?? '',
+          (r.weakUnits || []).join(' / ')
+        ].map(v => `"${String(v).replace(/"/g, '""')}"`);
+        lines.push(vals.join(','));
+      });
+
+      const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+      const blob = new Blob([bom, lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `keisan_batchiri_${activeClassCode || 'all'}_${Date.now()}.csv`;
+      a.download = `keisan_batchiri_${activeClassCode || 'all'}.csv`;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('この学級の CSVファイルを ダウンロードしました！');
+      showToast('📥 CSVファイルを ダウンロードしました！');
     }
 
-    // 結果画面のスクリーンショット撮影
-    async function takeResultScreenshot() {
-      if (typeof html2canvas === 'undefined') {
-        showToast('スクリーンショット機能を じゅんびちゅうです');
-        return;
+    // =========================================================================
+    // 12. モード切替＆メモらん手書きキャンバス
+    // =========================================================================
+    function switchMode(mode) {
+      if (isStudentOnlyView && mode === 'teacher') {
+        mode = 'study';
       }
-      showToast('📸 スクリーンショットを とっています...');
-      try {
-        const target = document.getElementById('capture-area') || document.body;
-        const canvas = await html2canvas(target, {
-          backgroundColor: '#f4f7fb',
-          scale: Math.min(2, window.devicePixelRatio || 1.5),
-          useCORS: true
-        });
-        const dataUrl = canvas.toDataURL('image/png');
-        const img = document.getElementById('screenshot-preview-img');
-        const modal = document.getElementById('screenshot-modal');
-        if (img && modal) {
-          img.src = dataUrl;
-          modal.classList.remove('hidden');
+
+      const views = ['study', 'record', 'teacher'];
+      views.forEach(v => {
+        const viewEl = document.getElementById(`view-${v}`);
+        const tabEl = document.getElementById(`tab-${v}`);
+        if (v === 'teacher' && isStudentOnlyView) {
+          if (viewEl) viewEl.classList.add('hidden');
+          if (tabEl) tabEl.classList.add('hidden');
+          return;
         }
-      } catch (err) {
-        console.error(err);
-        showToast('スクリーンショットに しっぱいしました');
-      }
+        if (viewEl) {
+          if (v === mode) viewEl.classList.remove('hidden');
+          else viewEl.classList.add('hidden');
+        }
+        if (tabEl) {
+          if (v === mode) {
+            tabEl.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+            tabEl.classList.remove('text-slate-600');
+          } else {
+            tabEl.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+            tabEl.classList.add('text-slate-600');
+          }
+        }
+      });
+
+      if (mode === 'record') renderRecordView();
+      if (mode === 'teacher') renderTeacherView();
+      if (mode === 'study') setTimeout(resizeMemoCanvas, 40);
     }
 
-    function closeScreenshotModal() {
-      const modal = document.getElementById('screenshot-modal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function showToast(msg) {
-      const box = document.getElementById('toast-box');
-      if (!box) return;
-      box.textContent = msg;
-      box.classList.remove('hidden');
-      clearTimeout(box._timer);
-      box._timer = setTimeout(() => {
-        box.classList.add('hidden');
-      }, 3200);
-    }
-
-    // =========================================================================
-    // 10. 右側：方眼メモらんキャンバス（黒ペン・赤ペン・消しゴム）
-    // =========================================================================
+    // メモらんキャンバス制御
     let penMode = 'black';
-    let isDrawingMemo = false;
-    let lastMemoX = 0;
-    let lastMemoY = 0;
+    let isDrawing = false;
+    let lastPt = null;
 
     function setPenMode(mode) {
       penMode = mode;
@@ -4541,6 +4719,14 @@
         : 'p-2 rounded-xl border-2 border-slate-200 bg-white text-slate-600 hover:bg-slate-100 transition flex items-center justify-center';
     }
 
+    function clearMemoCanvas() {
+      const canvas = document.getElementById('memo-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      setPenMode('black');
+    }
+
     function resizeMemoCanvas() {
       const wrapper = document.getElementById('memo-canvas-wrapper');
       const canvas = document.getElementById('memo-canvas');
@@ -4548,38 +4734,31 @@
       const rect = wrapper.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
-      const tempCanvas = document.createElement('canvas');
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-      if (canvas.width > 0 && canvas.height > 0) {
-        tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const targetW = Math.round(rect.width * dpr);
+      const targetH = Math.round(rect.height * dpr);
+      if (canvas.width === targetW && canvas.height === targetH) return;
+
+      const temp = document.createElement('canvas');
+      temp.width = canvas.width;
+      temp.height = canvas.height;
+      if (temp.width > 0 && temp.height > 0) {
+        temp.getContext('2d').drawImage(canvas, 0, 0);
       }
 
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(rect.height * dpr);
+      canvas.width = targetW;
+      canvas.height = targetH;
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
-
-      if (tempCanvas.width > 0 && tempCanvas.height > 0) {
-        ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width / dpr, tempCanvas.height / dpr);
+      if (temp.width > 0 && temp.height > 0) {
+        ctx.drawImage(temp, 0, 0, rect.width, rect.height);
       }
-    }
-
-    function clearMemoCanvas() {
-      const canvas = document.getElementById('memo-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.restore();
-      setPenMode('black');
     }
 
     function initMemoCanvas() {
       const canvas = document.getElementById('memo-canvas');
       if (!canvas) return;
+      const ctx = canvas.getContext('2d');
 
       const getPos = (e) => {
         const rect = canvas.getBoundingClientRect();
@@ -4592,20 +4771,16 @@
       canvas.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         canvas.setPointerCapture(e.pointerId);
-        isDrawingMemo = true;
-        const pos = getPos(e);
-        lastMemoX = pos.x;
-        lastMemoY = pos.y;
+        isDrawing = true;
+        lastPt = getPos(e);
       });
 
       canvas.addEventListener('pointermove', (e) => {
-        if (!isDrawingMemo) return;
-        e.preventDefault();
-        const pos = getPos(e);
-        const ctx = canvas.getContext('2d');
+        if (!isDrawing || !lastPt) return;
+        const pt = getPos(e);
+        ctx.save();
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-
         if (penMode === 'eraser') {
           ctx.globalCompositeOperation = 'destination-out';
           ctx.lineWidth = 22;
@@ -4614,82 +4789,72 @@
           ctx.strokeStyle = penMode === 'red' ? '#dc2626' : '#1e293b';
           ctx.lineWidth = 3;
         }
-
         ctx.beginPath();
-        ctx.moveTo(lastMemoX, lastMemoY);
-        ctx.lineTo(pos.x, pos.y);
+        ctx.moveTo(lastPt.x, lastPt.y);
+        ctx.lineTo(pt.x, pt.y);
         ctx.stroke();
-
-        lastMemoX = pos.x;
-        lastMemoY = pos.y;
+        ctx.restore();
+        lastPt = pt;
       });
 
-      const stopDraw = () => {
-        isDrawingMemo = false;
+      const endDraw = () => {
+        isDrawing = false;
+        lastPt = null;
       };
-      canvas.addEventListener('pointerup', stopDraw);
-      canvas.addEventListener('pointercancel', stopDraw);
+      canvas.addEventListener('pointerup', endDraw);
+      canvas.addEventListener('pointercancel', endDraw);
       window.addEventListener('resize', resizeMemoCanvas);
     }
 
-    // =========================================================================
-    // 11. 長押し・ダブルタップ時のコンテキストメニュー・選択メニュー抑止
-    // =========================================================================
-    function initTouchAndMenuGuard() {
-      // 長押しや右クリックによるコンテキストメニューを禁止（スクショ保存画像のみ許可）
-      document.addEventListener('contextmenu', (e) => {
-        if (e.target && e.target.id === 'screenshot-preview-img') return;
-        e.preventDefault();
-      }, { capture: true });
-
-      // 長押しやダブルタップによる文字選択メニュー（コピー・調べる等）を禁止
-      document.addEventListener('selectstart', (e) => {
-        const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-        e.preventDefault();
-      }, { capture: true });
-
-      // ダブルタップ・ダブルクリックによるブラウザ既定動作（拡大・選択など）を禁止
-      document.addEventListener('dblclick', (e) => {
-        const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-        e.preventDefault();
-      }, { capture: true });
-
-      // iOS Safari等のピンチ・ダブルタップ拡大ジェスチャーを抑止
-      document.addEventListener('gesturestart', (e) => {
-        e.preventDefault();
-      }, { passive: false });
+    // トースト通知
+    let toastTimer = null;
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      if (!box) return;
+      box.textContent = msg;
+      box.classList.remove('hidden');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 3200);
     }
 
     // =========================================================================
-    // 12. ページ読み込み完了時の初期実行
+    // 13. クラウド同期（Firebase環境提供時のみ自動有効化）
+    // =========================================================================
+    let cloudSaveHandler = null;
+    function saveRecordToCloud(rec) {
+      if (typeof cloudSaveHandler === 'function') {
+        cloudSaveHandler(rec);
+      }
+    }
+
+    // =========================================================================
+    // 14. 起動時初期化
     // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
-      initTouchAndMenuGuard();
       populateStudentNumbers();
       populatePrintSelect();
       loadStudentMeta();
       loadSavedClassCode();
-      updatePrintSelectRestrictions(false);
-      applyUrlParametersOnLoad();
-      updateTeacherShareUrls();
       initKanaKeypad();
       initMemoCanvas();
+      applyUrlParametersOnLoad();
+      updateTeacherShareUrls();
     });
   </script>
 
-  <!-- Web公開環境（Firebase設定提供時）での学級別リアルタイムクラウド集計連携 -->
+  <!-- Firebaseモジュール（環境変数 __firebase_config が存在するWeb公開環境で自動連携） -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    (async () => {
+    async function initCloudSync() {
       try {
         if (typeof __firebase_config === 'undefined' || !__firebase_config) return;
         const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'keisan-batchiri-app';
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -4699,46 +4864,38 @@
         } else {
           await signInAnonymously(auth);
         }
-
         const user = auth.currentUser;
         if (!user) return;
 
-        const recordsCol = collection(db, 'artifacts', appId, 'public', 'data', 'keisan_records');
-
-        window.__saveRecordToCloud = async (rec) => {
-          if (!auth.currentUser) return;
+        const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'keisan_records');
+        cloudSaveHandler = async (rec) => {
           try {
-            await addDoc(recordsCol, rec);
-          } catch (e) {
-            console.warn('Cloud record save skipped:', e);
+            if (!auth.currentUser) return;
+            await addDoc(colRef, { ...rec, uid: auth.currentUser.uid });
+          } catch (err) {
+            console.warn('Cloud save skipped:', err);
           }
         };
 
-        onSnapshot(
-          recordsCol,
-          (snap) => {
-            const list = [];
-            snap.forEach(docSnap => {
-              list.push({ _docId: docSnap.id, ...docSnap.data() });
-            });
-            cloudRecords = list;
-            const statusEl = document.getElementById('teacher-sync-status');
-            if (statusEl) {
-              statusEl.textContent = '☁️ クラウドリアルタイム集計中';
-            }
-            const teacherView = document.getElementById('view-teacher');
-            if (teacherView && !teacherView.classList.contains('hidden')) {
-              renderTeacherView();
-            }
-          },
-          (err) => {
-            console.warn('Firestore snapshot error:', err);
+        onSnapshot(colRef, (snapshot) => {
+          const list = [];
+          snapshot.forEach(docSnap => {
+            list.push(docSnap.data());
+          });
+          cloudRecords = list;
+          const teacherView = document.getElementById('view-teacher');
+          if (teacherView && !teacherView.classList.contains('hidden')) {
+            renderTeacherView();
           }
-        );
-      } catch (err) {
-        console.warn('Cloud sync init skipped:', err);
+        }, (err) => {
+          console.warn('Cloud snapshot error:', err);
+        });
+      } catch (e) {
+        console.warn('Cloud sync not active:', e);
       }
-    })();
+    }
+
+    initCloudSync();
   </script>
 </body>
 </html>
